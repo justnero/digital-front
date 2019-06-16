@@ -1,0 +1,364 @@
+$gray-800: #252827;
+$white: #f8f8f8;
+$primary: #f8cf2c;
+$vs-state-active-bg: lighten($primary, 30%);
+$vs-state-active-color: #000;
+
+@import "~bootstrap/scss/bootstrap";
+@import "~leaflet/dist/leaflet.css";
+@import "~vue-select/src/scss/vue-select.scss";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import "vendor/slider";
+//@import "css/style.css";
+//@import "css/responsive.css";
+
+html, body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#app {
+    font-family: 'Open Sans', sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+
+.navbar {
+    margin-bottom: 0;
+    padding: 0 !important;
+
+    .navbar-brand {
+        .brand-name {
+            vertical-align: -webkit-baseline-middle;
+            margin-left: 10px;
+
+            b {
+                color: $primary;
+            }
+        }
+    }
+
+    .nav-item {
+        padding: 0;
+
+        .nav-link {
+            display: block;
+            position: relative;
+            padding: 36px;
+
+            &.nav-primary {
+                color: lighten($primary, 20%);
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+
+            &::after {
+                opacity: 0;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 5px;
+                background-color: $primary;
+                content: '';
+            }
+
+            &:hover::after {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+header {
+    position: relative;
+    min-height: 350px;
+    background-size: cover;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+    filter: contrast(70%);
+
+    .tag-line {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 36px;
+        color: $primary;
+        text-shadow: 1px 1px 0 #000;
+        font-weight: bold;
+    }
+}
+
+.header-filters {
+    margin-top: -40px;
+
+
+    .filters {
+        background-color: #FFF;
+        border-radius: 1px;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 9;
+        border: 1px solid #E6E6E6;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        display: inline-block;
+        width: 100%;
+
+        > .row + .row {
+            margin-top: 15px;
+        }
+
+        label {
+            margin-bottom: .25rem;
+        }
+    }
+}
+
+.form-control {
+    background: rgba(252, 252, 252, 0.35);
+    border-radius: 1px;
+    color: #ADADAD;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.vue-slider-process {
+    border-radius: 0;
+}
+
+.estate-list,
+.district-list {
+    margin-top: 60px;
+
+    > .container > .row + .row {
+        margin-top: 30px;
+    }
+}
+
+.estate-card {
+    position: relative;
+    background-color: #FFF;
+    border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+    .meta-type {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 2px 8px;
+        background-color: $primary;
+    }
+
+    .meta-rating {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 2px 8px;
+        background-color: $primary;
+        z-index: 10;
+    }
+
+    .item-thumb {
+        img {
+            max-width: 100%;
+        }
+
+        a {
+            display: block;
+            max-width: 100%;
+            max-height: 140px;
+            overflow: hidden;
+        }
+    }
+
+    .item-entry {
+        padding: 10px;
+
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+.district-card {
+    position: relative;
+    background-color: #FFF;
+    border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    min-height: 300px;
+
+    h3 {
+        margin-bottom: 20px;
+
+        > a {
+            color: $gray-800;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+
+    .item-entry {
+        position: relative;
+        padding: 30px;
+        flex-grow: 1;
+
+        .toggle-show {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 10px;
+            border-radius: 0 0 0 4px;
+        }
+
+        .item-additional-meta {
+            margin-top: 15px;
+        }
+
+        .item-meta-data {
+            display: flex;
+            text-align: right;
+
+            svg {
+                width: 20px;
+            }
+
+            b {
+                display: inline-block;
+                width: 40px;
+                padding: 0 5px;
+                font-weight: bold;
+                text-align: right;
+                flex-grow: 1;
+            }
+
+            .title {
+                text-align: left;
+                display: inline-block;
+                padding: 0 5px;
+                flex-grow: 1;
+            }
+        }
+    }
+
+    .item-map {
+        width: 25%;
+        flex-shrink: 0;
+    }
+}
+
+.search {
+    height: calc(100% - 96px);
+    //padding-top: 96px;
+    //margin-top: -96px;
+}
+
+.estate-modal {
+    position: fixed;
+    top: 192px;
+    left: 24px;
+    z-index: 1000;
+
+    .estate-show {
+        position: relative;
+        background-color: #FFF;
+        border: 1px solid #E6E6E6;
+        box-sizing: border-box;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+
+        .meta-type {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 2px 8px;
+            background-color: $primary;
+            z-index: 10;
+        }
+
+        .meta-rating {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 2px 8px;
+            background-color: $primary;
+            z-index: 10;
+        }
+
+        .item-thumb {
+            overflow: hidden;
+
+            img {
+                max-width: 100%;
+            }
+
+            a {
+                display: block;
+                max-width: 100%;
+                max-height: 140px;
+                overflow: hidden;
+            }
+        }
+
+        .item-entry {
+            padding: 10px;
+
+            .item-meta {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .item-actions {
+                margin-top: 15px;
+            }
+
+            .item-stats {
+                margin-top: 15px;
+
+                .item-meta-data {
+                    display: flex;
+
+                    svg {
+                        width: 20px;
+                    }
+
+                    b {
+                        display: inline-block;
+                        width: 40px;
+                        padding: 0 5px;
+                        font-weight: bold;
+                        text-align: right;
+                        flex-grow: 1;
+                    }
+
+                    .title {
+                        display: inline-block;
+                        padding: 0 5px;
+                        //flex-grow: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.marker-primary {
+    fill: $primary;
+    stroke: $primary;
+}
+
+.VueCarousel-pagination {
+    display: none;
+}
